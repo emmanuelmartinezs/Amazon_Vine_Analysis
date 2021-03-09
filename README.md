@@ -26,60 +26,241 @@ This new assignment consists of three technical analysis deliverables and a prop
 ![logo](https://github.com/emmanuelmartinezs/Amazon_Vine_Analysis/blob/main/Resources/Images/Vine-Header.png?raw=true)
 
 
-### Install R
+### Cloud Storage with S3 on AWS
+#### Database Versus Data Storage
 
-We must first install R before installing RStudio. This way, RStudio can easily find our R installation while being configured; otherwise, we would have to manually tell RStudio where to find our installed applications.
+Data storage holds raw data such as CSVs, Excel files, and JavaScript Object Notation (JSON) files. Think of your own computer file system where you keep a ton of files as data storage. This data doesn't need to be queried and analyzed for business decisions. The files still have structure and can be reviewed, but not nearly as efficiently as a database.
 
-To install R on macOS or Windows, navigate to [R's Comprehensive R Archive Network (CRAN) server](https://cran.r-project.org/mirrors.html) and select a mirror link near our region. In most cases, any U.S. mirror link will do (see the following images):
+A database contains cleaned, related information in tabular form. This database has been carefully planned and structured so that data can be analyzed efficiently through queries. Doing so comes at a cost of processing data to fit all the rules and structures.
 
-![d1](https://github.com/emmanuelmartinezs/MechaCar_Statistical_Analysis/blob/main/Resources/Images/data-15-1-2-1-R_Installation-Page-Mirror_Links.png)
+Data storage is a place where large amounts of raw data can be kept without any munging or curating. Data storage allows us to keep data of different types or data we might want to parse in the future.
 
-![d1](https://github.com/emmanuelmartinezs/MechaCar_Statistical_Analysis/blob/main/Resources/Images/data-15-1-2-2-R_Installation-Page-URLs_US_Servers.png)
-
-After you navigate to a CRAN mirror site, you'll reach a self-explanatory download page. Follow the appropriate download link for either your macOS or Windows environment:
-
-![d1](https://github.com/emmanuelmartinezs/MechaCar_Statistical_Analysis/blob/main/Resources/Images/data-15-1-2-3-Mirror-Link_Download_Links.png)
-
-For those running a macOS environment, select the latest release .pkg file (the link is midpage):
-
-![d1](https://github.com/emmanuelmartinezs/MechaCar_Statistical_Analysis/blob/main/Resources/Images/data-15-1-2-4-mirror-link-provides-download-links.png)
-
-For those running a Windows environment, click on the base installer link. On the next page, click the "Download R for Windows" link to start downloading the installer:
-
-![d1](https://github.com/emmanuelmartinezs/MechaCar_Statistical_Analysis/blob/main/Resources/Images/data-15-1-2-5-Mirror-Link-R-Version-Windows.png)
-
-Once your installer files are successfully downloaded (.pkg for macOS or .exe for Windows), run them just as you would for any other installation program. Use all default install options and, if prompted, check all boxes to allow all R components to install.
+The benefit of having dedicated data storage is that nothing limits the intake of data. Data can flow in constantly and be saved without having to worry if it fits the criteria of the database. We have seen this with our extract, transform, and load (ETL) process—the data storage can hold raw files, such as CSV or JSON, for different needs.
 
 
-### Install RStudio
+#### AWS's Simple Storage Service
 
-Once you have completed the installation for R, it's time to install RStudio. Now navigate to the [RStudio Download Page](https://rstudio.com/products/rstudio/download/?utm_source=downloadrstudio&utm_medium=Site&utm_campaign=home-hero-cta#download) and select the most appropriate installer link. Refer to the following image:
+S3 is Amazon's cloud file storage service that uses key-value pairs. Files are stored on multiple servers and have a high rate of availability of more than 99.9%. To store files, S3 uses buckets, which are similar to folders or directories on your computer. Buckets can contain additional folders and files. Each bucket must have a unique name across all of AWS.
 
-![d1](https://github.com/emmanuelmartinezs/MechaCar_Statistical_Analysis/blob/main/Resources/Images/data-15-1-3-1-R-Studio-Download-Page.png)
+One of S3's perks is its fine-grained control over files. Each file or bucket can have different read and write permissions, which helps regulate what can be done with each file.
 
-If you're using macOS, drag the RStudio application into your application folder. If you're a Windows user, run it through the installer as you would with any other Windows program.
-
-Once you have R and RStudio installed, run RStudio for the first time, get acquainted with the software, and install our required packages.
-
-**Navigate and Configure RStudio**
-When you first open up RStudio, you'll notice four panes laid out within the application window. The top-left pane contains your source, or (any RScripts, tables, and files you open within RStudio). By default, RStudio will open an untitled RScript file in the pane for you, so you can start programming right away:
-
-![d1](https://github.com/emmanuelmartinezs/MechaCar_Statistical_Analysis/blob/main/Resources/Images/data-15-1-3-2-R-Studio-Source-Pane.png)
-
-The bottom-left pane contains the R console. Similar to Python, R can either run an RScript as an executable script or R can run interactively. RStudio combines the best of both worlds where the source RScript (in the top-left pane) can be run all at once, or line by line. By including the R console within the application, we can interact with our environment in real time and test parts of our code before we write them in our scripts:
-
-![d1](https://github.com/emmanuelmartinezs/MechaCar_Statistical_Analysis/blob/main/Resources/Images/data-15-1-3-3-R-Console-Pane-Bottom-Left.png)
-
-The top-right pane contains our environment objects, such as variables, functions, and data frames. As we execute commands in the R console, either using our source RScript or manually, any objects generated in the R environment will show up in the top-right pane. This environment pane helps us keep track of the shape, data type, and contents of each variable within our environment without having to print out our variables in the console. As we explore R in this module, the environment pane will prove even more useful for tracking what each line of code does to our data:
-
-![d1](https://github.com/emmanuelmartinezs/MechaCar_Statistical_Analysis/blob/main/Resources/Images/data-15-1-3-4-R-Console-Pane-Top-Right.png)
-
-On the bottom right is the multi-tool pane, which contains tabs for a file explorer, R documentation help, installed package list, and a plot viewing tool. Later, we'll refer to the Plots tab for exploring our generated plots. Additionally, you can use the Files tab to open RScripts from your computer or to copy file paths to include within your RScripts. Finally, to learn more about a function or object from a library in R, simply type ?<name of function or object> in the R console to open the documentation in the Help tab of the multi-tool pane:
-
-![d1](https://github.com/emmanuelmartinezs/MechaCar_Statistical_Analysis/blob/main/Resources/Images/data-15-1-3-5-R-Studio-Multi-Tool-Pane.png)
+S3 is also very scalable—you are not limited to the memory of one computer. As data flows in, more and more can be stored, as opposed to a local computer that is limited by available memory. Additionally, it offers availability—several team members can access massive amounts of data from one central location.
 
 
-Now that we understand RStudio's layout, we'll install our required libraries to use them in our RScripts for this module. Thankfully, R developers have built robust library collections, such as the [tidyverse](https://www.tidyverse.org/), that simplify the installation process for the most common data analysis packages in R. To install packages in our R environment, use the install.packages() function. 
+#### PySpark and S3 Stored Data
+
+Since PySpark is a big data tool, it has many ways of reading in files from data storage so that we can manipulate them. We have decided to use S3 as our data storage, so we'll use PySpark for all data processing.
+
+Using PySpark is how we've been reading in our data into Google Colab so far. The format for reading in from S3 is the S3 link, followed by your bucket name, folder by each folder, and then the filename, as follows:
+
+For US East (default region)
+
+template_url = "https://<bucket-name>.s3.amazonaws.com/<folder-name>/<file-name>"
+
+example_url = "https://dataviz-curriculum.s3.amazonaws.com/data-folder/data.csv"
+For other regions
+
+template_url = "https://<bucket-name.s3-<region>.amazonaws.com/<folder-name>/<file-name>"
+
+example_url =" https://dataviz-curriculum.s3-us-west-1.amazonaws.com/data-folder/data.csv"
+
+
+#### PySpark ETL (Extract, Transform and Load)
+
+Let's run through a mock scenario using two different types of raw data stored in S3. Our goal is to get this raw data from S3 into an RDS database.
+
+Assume your company already has three tables set up in the RDS database and would like to get the raw data from S3 into the database. Create a new database in pgAdmin called "my_data_class_db." We'll have it represent the company database by first running the following schema in pgAdmin for our RDS:
+
+````sql
+-- Create Active User Table
+CREATE TABLE active_user (
+ id INT PRIMARY KEY NOT NULL,
+ first_name TEXT,
+ last_name TEXT,
+ username TEXT
+);
+
+CREATE TABLE billing_info (
+ billing_id INT PRIMARY KEY NOT NULL,
+ street_address TEXT,
+ state TEXT,
+ username TEXT
+);
+
+CREATE TABLE payment_info (
+ billing_id INT PRIMARY KEY NOT NULL,
+ cc_encrypted TEXT
+);
+````
+
+**NOTE**
+Table creation is not part of the ETL process. We're creating the tables to represent a pre-established database you need for the raw data. In a real-life situation, databases will already have a well-defined schema and tables for you, as the engineer, to process data into.
+
+Start with creating a new notebook, installing Spark:
+
+````python
+import os
+# Find the latest version of spark 3.0  from http://www-us.apache.org/dist/spark/ and enter as the spark version
+# For example:
+# spark_version = 'spark-3.0.2'
+spark_version = 'spark-3.<enter version>'
+os.environ['SPARK_VERSION']=spark_version
+
+# Install Spark and Java
+!apt-get update
+!apt-get install openjdk-11-jdk-headless -qq > /dev/null
+!wget -q http://www-us.apache.org/dist/spark/$SPARK_VERSION/$SPARK_VERSION-bin-hadoop2.7.tgz
+!tar xf $SPARK_VERSION-bin-hadoop2.7.tgz
+!pip install -q findspark
+
+# Set Environment Variables
+import os
+os.environ["JAVA_HOME"] = "/usr/lib/jvm/java-11-openjdk-amd64"
+os.environ["SPARK_HOME"] = f"/content/{spark_version}-bin-hadoop2.7"
+
+# Start a SparkSession
+import findspark
+findspark.init()
+````
+
+We'll use Spark to write directly to our Postgres database. But in order to do so, there are few more lines of code we need.
+
+First, enter the following code to download a Postgres driver that will allow Spark to interact with Postgres:
+
+````python
+!wget https://jdbc.postgresql.org/download/postgresql-42.2.16.jar
+````
+You should get a message containing the words "HTTP request sent, awaiting response… 200 OK," indicating that your request was processed without a problem.
+Then, start a Spark session with an additional option that adds the driver to Spark:
+
+````python
+from pyspark.sql import SparkSession
+spark = SparkSession.builder.appName("CloudETL").config("spark.driver.extraClassPath","/content/postgresql-42.2.16.jar").getOrCreate()
+````
+
+We have performed the first two steps of the ETL process before with PySpark, so let's quickly review those.
+
+
+**Extract**
+We can connect to data storage, then extract that data into a DataFrame. We'll do this on two datasets, and be sure to replace the bucket name with one of your own.
+
+We'll start by importing SparkFiles from PySpark into our notebook. This will allow Spark to add a file to our Spark project.
+
+Next, the file is read in with the read method and combined with the csv() method, which pulls in our CSV stored in SparkFiles and infers the schema. SparkFiles.get() will have Spark retrieve the specified file, since we are dealing with a CSV.  The "," is the chosen separator, and we will have Spark determine the head for us. Enter the following code:
+
+````python
+# Read in data from S3 Buckets
+from pyspark import SparkFiles
+url ="https://YOUR-BUCKET-NAME.s3.amazonaws.com/user_data.csv"
+spark.sparkContext.addFile(url)
+user_data_df = spark.read.csv(SparkFiles.get("user_data.csv"), sep=",", header=True, inferSchema=True)
+````
+
+Finally, an action is called to show the first 10 runs and confirm our data extraction by entering the following code:
+
+````python
+# Show DataFrame
+user_data_df.show()
+````
+
+Repeat a similar process to load in the other data. Enter the code:
+
+````python
+url ="https://YOUR-BUCKET-NAME.s3.amazonaws.com/user_payment.csv"
+spark.sparkContext.addFile(url)
+user_payment_df = spark.read.csv(SparkFiles.get("user_payment.csv"), sep=",", header=True, inferSchema=True)
+
+# Show DataFrame
+user_payment_df.show()
+````
+
+**Transform**
+Now that the raw data stored in S3 is available in a PySpark DataFrame, we can perform our transformations.
+
+First, join the two tables:
+
+![d1](https://github.com/emmanuelmartinezs/Amazon_Vine_Analysis/blob/main/Resources/Images/data-16-9-1-1-Join-Two-DataFrames.png)
+
+
+Next, drop any rows with null or "not a number" (NaN) values:
+
+![d1](https://github.com/emmanuelmartinezs/Amazon_Vine_Analysis/blob/main/Resources/Images/data-16-9-1-2-Drop-Null-Values.png)
+
+Filter for active users:
+
+![d1](https://github.com/emmanuelmartinezs/Amazon_Vine_Analysis/blob/main/Resources/Images/data-16-9-1-3-Load-Sql-Function.png)
+
+Next, select columns to create three different DataFrames that match what is in the AWS RDS database. Create a DataFrame to match the active_user table:
+
+![d1](https://github.com/emmanuelmartinezs/Amazon_Vine_Analysis/blob/main/Resources/Images/data-16-9-1-4-Create-User-Dataframe-Active-User-Table.png)
+
+Next, create a DataFrame to match the billing_info table:
+
+![d1](https://github.com/emmanuelmartinezs/Amazon_Vine_Analysis/blob/main/Resources/Images/data-16-9-1-5-Create-User-DataFrame-Match-Billing-Info-Table.png)
+
+Finally, create a DataFrame to match the payment_info table:
+
+![d1](https://github.com/emmanuelmartinezs/Amazon_Vine_Analysis/blob/main/Resources/Images/data-16-9-1-6-Create-User-DataFrame-Match-Payment.png)
+
+Once our data has been transformed to fit the tables in our database, we're ready to move on to the "Load" step.
+
+**Load**
+The final step is to get our transformed raw data into our database. PySpark can easily connect to a database to load the DataFrames into the table. First, we'll do some configuration to allow the connection with the following code:
+
+````python
+# Configure settings for RDS
+mode = "append"
+jdbc_url="jdbc:postgresql://<connection string>:5432/<database-name>"
+config = {"user":"postgres",
+          "password": "<password>",
+          "driver":"org.postgresql.Driver"}
+````
+
+You'll need to provide your username and password, and also supply the AWS server name where `<connection string>` is located in the code above. To find it in PgAdmin, right-click AWS in the Server directory listing on the left side of PgAmin, and then select Properties in the drop-down menu. Select the Connection tab in the window that opens, and then select the address in the Host name/address field. Copy that address and paste it in place of `<connection string>`.
+
+
+Let's further break down what's happening here:
+
+* `mode` is what we want to do with the DataFrame to the table, such as `overwrite` or `append`. We'll append to the current table because every time we run this ETL process, we'll want more data added to our database without removing any.
+* The `jdbc_url` is the connection string to our database.
+- Replace `<connection string>` with the endpoint connection url found from your AWS RDS console.
+- Replace `<database name>` with the name of your database you wish to connect to.
+* A dictionary of configuration that includes the `user`, `password`, and `driver` to what type of database is being used.
+- The `user` field is the username for your database, which should be `postgres` if you followed with the creation of the RDS instance. Otherwise, enter the one you created.
+- The `password` would be the password you created when making the RDS instance.
+
+**NOTE**
+> If you forget anything like the name of the database or user name you can check on pgAdmin for these values. Be sure that you are entering the name of the database and not the name of your server in the connection string.
+
+The cleaned DataFrames can then be written directly to our database by using the `.write.jdbc` method that takes in the parameters we set:
+
+The connection string stored in `jdbc_url` is passed to the URL argument.
+The corresponding name of the table we are writing the DataFrame to.
+The mode we're using, which is "append."
+The connection configuration we set up passed to the properties.
+The code is as follows:
+
+````python
+# Write DataFrame to active_user table in RDS
+clean_user_df.write.jdbc(url=jdbc_url, table='active_user', mode=mode, properties=config)
+
+# Write dataframe to billing_info table in RDS
+clean_billing_df.write.jdbc(url=jdbc_url, table='billing_info', mode=mode, properties=config)
+
+# Write dataframe to payment_info table in RDS
+clean_payment_df.write.jdbc(url=jdbc_url, table='payment_info', mode=mode, properties=config)
+
+````
+Let's wrap up by double-checking our work and running queries in pgAdmin on our database to confirm that the load did exactly what we wanted:
+
+````sql
+-- Query database to check successful upload
+SELECT * FROM active_user;
+SELECT * FROM billing_info;
+SELECT * FROM payment_info;
+````
+
+Nice work! You now have enough knowledge and practice with PySpark and AWS to begin your client project.
 
 
 > Let's move on!
