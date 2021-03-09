@@ -23,7 +23,7 @@ This new assignment consists of three technical analysis deliverables and a prop
 
 ## Resources and Before Start Notes:
 
-![logo](https://github.com/emmanuelmartinezs/MechaCar_Statistical_Analysis/blob/main/Resources/Images/Vine-Header.png?raw=true)
+![logo](https://github.com/emmanuelmartinezs/Amazon_Vine_Analysis/blob/main/Resources/Images/Vine-Header.png?raw=true)
 
 
 ### Install R
