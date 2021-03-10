@@ -415,6 +415,7 @@ For the majority of Vine Reviews, the analysis provide a **49% of 5 Star reviews
 ![d1](https://github.com/emmanuelmartinezs/Amazon_Vine_Analysis/blob/main/Resources/Images/r10.png)   
 
 And for the majority of the non-Vine Reviews, the analysis provide a **60% of 5 Star reviews**
+
 ![d1](https://github.com/emmanuelmartinezs/Amazon_Vine_Analysis/blob/main/Resources/Images/r11.png) 
 
 
