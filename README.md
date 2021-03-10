@@ -405,13 +405,16 @@ Below some recommendations to follow:
 
 > In addition, 
 
-The analysis gave us that **1/4 are Vine Reviews**.   
+The analysis gave us that **1/4 are Vine Reviews**
+  
 ![d1](https://github.com/emmanuelmartinezs/Amazon_Vine_Analysis/blob/main/Resources/Images/r8.png)  
 
-Specific Product provide an average of **57% 5 Star reviews**.  
+Specific Product provide an average of **57% 5 Star reviews**  
+
 ![d1](https://github.com/emmanuelmartinezs/Amazon_Vine_Analysis/blob/main/Resources/Images/r9.png)  
 
 For the majority of Vine Reviews, the analysis provide a **49% of 5 Star reviews**   
+
 ![d1](https://github.com/emmanuelmartinezs/Amazon_Vine_Analysis/blob/main/Resources/Images/r10.png)   
 
 And for the majority of the non-Vine Reviews, the analysis provide a **60% of 5 Star reviews**
