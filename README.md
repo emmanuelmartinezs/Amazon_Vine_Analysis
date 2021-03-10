@@ -358,7 +358,7 @@ You will earn a perfect score for Deliverable 1 by completing all requirements b
 
 
 
-#### DELIVERABLE RESULTS:
+### DELIVERABLE RESULTS:
 
 **Helpful Reviews (All) with 5 Star:**  
 For all reviews and "helpful" reviews, **around half of the ratings are 5 Star**, which indicates that the Vine programs tend to give 5 Stars over any other rating.
@@ -388,7 +388,7 @@ By Filtering the "helpful" reviews only, we saw and found a light difference; **
 ![d1](https://github.com/emmanuelmartinezs/Amazon_Vine_Analysis/blob/main/Resources/Images/r4.png)
 
 
-## SUMMARY
+### SUMMARY
 
 
 1. The majority of reviews for Furniture product are almost nothing or lower results from Vine participants: **99.6% are Non-Vine**.  
