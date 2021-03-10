@@ -399,25 +399,23 @@ By Filtering the "helpful" reviews only, we saw and found a light difference; **
 ### RECOMMENDATIONS:
 Below some recommendations to follow:
 
-1. This exercise determines favorable bias based on the 5-star rating; however, a favorable review could be considered **4- or 5-star**.  In which case, these comparisons could be re-run including both ratings to see if a bias emerges.  
+1. The Amazon Vine Analysis provide a favorable dataset on the 5-star rating.
 
-2. There is so much data not involving Vine participants in this specific product group, that we could minimize the "noise" and create a subset that focuses on just Vine products.
+2. In addition, we found that much data isn't Vine reviews over specific products, that we could minimize the resluts and create a different dataset on just Vine products.
 
-Pulling only reviews for Vine participating Product IDs and joining that with the full dataset (on Product ID) will create a table with all reviews (Vine and non-Vine) that involve a Vine participating product.
+> In addition, 
 
-The resulting dataset includes only 10,689 reviews; and **approximately 1/4 are Vine Reviews**, *much higher than the less than 1% when involviong the entire dataset!*   
+The analysis gave us that **1/4 are Vine Reviews**.   
 ![d1](https://github.com/emmanuelmartinezs/Amazon_Vine_Analysis/blob/main/Resources/Images/r8.png)  
 
-Of all the reviews for these specific Product IDs, **57% involve 5-star reviews**.  *This is very similiar to the results of the entire dataset (56.5% have 5-star review)*  
+Specific Product provide an average of **57% 5 Star reviews**.  
 ![d1](https://github.com/emmanuelmartinezs/Amazon_Vine_Analysis/blob/main/Resources/Images/r9.png)  
 
-Of all the Vine Reviews for these specific Product IDs, **49% involve 5-star reviews**, which of course the same view as the previous 'All Vine Reviews 5-Star'    
+For the majority of Vine Reviews, the analysis provide a **49% of 5 Star reviews**   
 ![d1](https://github.com/emmanuelmartinezs/Amazon_Vine_Analysis/blob/main/Resources/Images/r10.png)   
 
-Of all the non-Vine Reviews for these specific Product IDs, **60% involve 5-star reviews**. This is of course a much smaller number (4,737) than the previous view involving the original dataset, but the pecentage is similar.  
+And for the majority of the non-Vine Reviews, the analysis provide a **60% of 5 Star reviews**
 ![d1](https://github.com/emmanuelmartinezs/Amazon_Vine_Analysis/blob/main/Resources/Images/r11.png) 
-
-Effectively the results come to the same conclusion: there is little difference in the occurrance of a 5-star rating from a Vine reviewer than a non-Vine reviewer, which indicates **there is no favorable bias**.
 
 
 
